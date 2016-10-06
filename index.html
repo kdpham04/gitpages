@@ -1,26 +1,10 @@
 <!DOCTYPE html>
 
-<html>
-<body>
-
-<input type='file' />
-<img id="myImg" src="#" alt="your image" />
-
-$(function () {
-    $(":file").change(function () {
-        if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.onload = imageIsLoaded;
-            reader.readAsDataURL(this.files[0]);
-        }
-    });
-});
-
-function imageIsLoaded(e) {
-    $('#myImg').attr('src', e.target.result);
-};
-
-</body>
+<html>      
+<body>   
+pic1: <img id="pic1" src="default.jpg" width="150px"> <br>   
+<form>   
+upload: <input type="file" name="pic" onchange="document.getElementById('pic1').src='file://'+this.value">   
+</form>   
+</body>   
 </html>
-
-
