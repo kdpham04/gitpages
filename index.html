@@ -4,29 +4,21 @@
 <body>   
 
  <div class="info">
-    <input type="file" id="files" />
-    <output id="list"></output>
-    <script>
-	if (window.FileReader) {
-      function handleFileSelect(evt) {
-        var files = evt.target.files;
-        var f = files[0];
-        var reader = new FileReader();
-		
-          reader.onload = (function(theFile) {
-            return function(e) {
-              document.getElementById('list').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="50"/>'].join('');
-            };
-          })(f);
-    
-          reader.readAsDataURL(f);
-      }
-	 } else {
-	  alert('This browser does not support FileReader');
-	}
-    
-      document.getElementById('files').addEventListener('change', handleFileSelect, false);
-    </script>
+<input type='file' accept='image/*' onchange='openFile(event)'><br>
+<img id='output'>
+<script>
+  var openFile = function(event) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      var output = document.getElementById('output');
+      output.src = dataURL;
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
+</script>
     
   </div>
 </body>   
